@@ -1,9 +1,0 @@
-{
-  "chickenwingdemo.db.synonym::DUMMY": {
-    "target": {
-      "object": "DUMMY",
-      "schema": "SYS",
-      "database": "HDB"
-    }
-  }
-}
