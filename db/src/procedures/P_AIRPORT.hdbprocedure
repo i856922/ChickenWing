@@ -1,0 +1,11 @@
+PROCEDURE "chickenwingdemo.db.procedures::P_AIRPORT" ( )
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   --DEFAULT SCHEMA <default_schema_name>
+   READS SQL DATA AS
+BEGIN
+   /*************************************
+       Write your procedure logic 
+   *************************************/
+   select * from "chickenwingdemo.db.synonym::AIRPORT";
+END
