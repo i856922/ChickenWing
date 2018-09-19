@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="chickenwingdemo.db.models::CV_Booking" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="CV_Booking"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="chickenwingdemo.db.synonym::BOOKING">
+    <resourceUri>chickenwingdemo.db.synonym::BOOKING</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+    <viewAttributes>
+      <viewAttribute id="FLIGHT">
+        <descriptions defaultDescription="FLIGHT"/>
+      </viewAttribute>
+      <viewAttribute id="FDATE">
+        <descriptions defaultDescription="FDATE"/>
+      </viewAttribute>
+      <viewAttribute id="MODEL">
+        <descriptions defaultDescription="MODEL"/>
+      </viewAttribute>
+      <viewAttribute id="SEAT">
+        <descriptions defaultDescription="SEAT"/>
+      </viewAttribute>
+      <viewAttribute id="CUSTID">
+        <descriptions defaultDescription="CUSTID"/>
+      </viewAttribute>
+      <viewAttribute id="STDPRICE">
+        <descriptions defaultDescription="STDPRICE"/>
+      </viewAttribute>
+      <viewAttribute id="BOOKPRICE">
+        <descriptions defaultDescription="BOOKPRICE"/>
+      </viewAttribute>
+      <viewAttribute id="FEES">
+        <descriptions defaultDescription="FEES"/>
+      </viewAttribute>
+      <viewAttribute id="DISCOUNT">
+        <descriptions defaultDescription="DISCOUNT"/>
+      </viewAttribute>
+      <viewAttribute id="TAX">
+        <descriptions defaultDescription="TAX"/>
+      </viewAttribute>
+      <viewAttribute id="TOTAL">
+        <descriptions defaultDescription="TOTAL"/>
+      </viewAttribute>
+      <viewAttribute id="PAYMENT">
+        <descriptions defaultDescription="PAYMENT"/>
+      </viewAttribute>
+      <viewAttribute id="CHECKIN">
+        <descriptions defaultDescription="CHECKIN"/>
+      </viewAttribute>
+      <viewAttribute id="STATUS">
+        <descriptions defaultDescription="STATUS"/>
+      </viewAttribute>
+      <viewAttribute id="PASSENGER">
+        <descriptions defaultDescription="PASSENGER"/>
+      </viewAttribute>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="chickenwingdemo.db.synonym::BOOKING">
+      <mapping xsi:type="Calculation:AttributeMapping" target="FLIGHT" source="FLIGHT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="FDATE" source="FDATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MODEL" source="MODEL"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SEAT" source="SEAT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CUSTID" source="CUSTID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="STDPRICE" source="STDPRICE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="BOOKPRICE" source="BOOKPRICE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="FEES" source="FEES"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DISCOUNT" source="DISCOUNT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TAX" source="TAX"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TOTAL" source="TOTAL"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PAYMENT" source="PAYMENT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CHECKIN" source="CHECKIN"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="STATUS" source="STATUS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PASSENGER" source="PASSENGER"/>
+    </input>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Projection_1">
+  <attributes>
+    <attribute id="FDATE$local">
+      <descriptions defaultDescription="FDATE"/>
+      <keyMapping columnObjectName="Projection_1" columnName="FDATE"/>
+    </attribute>
+    <attribute id="CUSTID$local">
+      <descriptions defaultDescription="CUSTID"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CUSTID"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+  <sharedDimensions>
+    <logicalJoin associatedObjectUri="chickenwingdemo.db.models::CVPriceCalendar">
+      <attributes>
+        <attributeRef>FDATE$local</attributeRef>
+      </attributes>
+      <associatedAttributeNames>
+        <attributeName>CDATE</attributeName>
+      </associatedAttributeNames>
+      <properties cardinality="CN_1" joinType="leftOuter" joinOperator="Equal"/>
+      <associatedAttributeFeatures/>
+    </logicalJoin>
+    <logicalJoin associatedObjectUri="chickenwingdemo.db.models::CVCustomer">
+      <attributes>
+        <attributeRef>CUSTID$local</attributeRef>
+      </attributes>
+      <associatedAttributeNames>
+        <attributeName>CUSTID</attributeName>
+      </associatedAttributeNames>
+      <properties cardinality="CN_1" joinType="leftOuter" joinOperator="Equal"/>
+      <associatedAttributeFeatures/>
+    </logicalJoin>
+  </sharedDimensions>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="100" y="223"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Projection_1" modelObjectNameSpace="StarJoinViewNodeInput" modelObjectType="repository">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="chickenwingdemo.db.models::CVPriceCalendar" modelObjectNameSpace="StarJoinViewNodeSharedCV" modelObjectType="repository">
+      <upperLeftCorner x="462" y="23"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="chickenwingdemo.db.models::CVCustomer" modelObjectNameSpace="StarJoinViewNodeSharedCV" modelObjectType="repository">
+      <upperLeftCorner x="462" y="221"/>
+      <rectangleSize width="250"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

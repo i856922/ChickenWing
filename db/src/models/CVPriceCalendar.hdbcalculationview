@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="chickenwingdemo.db.models::CVPriceCalendar" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="TIME" schemaVersion="3.0" outputViewType="Projection" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="CVPriceCalendar"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="chickenwingdemo.db.synonym::PRICE_CALENDAR">
+    <resourceUri>chickenwingdemo.db.synonym::PRICE_CALENDAR</resourceUri>
+  </DataSource>
+  <DataSource id="chickenwingdemo.db.synonym::time">
+    <resourceUri>chickenwingdemo.db.synonym::time</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+    <viewAttributes>
+      <viewAttribute id="CDATE">
+        <descriptions defaultDescription="CDATE"/>
+      </viewAttribute>
+      <viewAttribute id="RATE">
+        <descriptions defaultDescription="RATE"/>
+      </viewAttribute>
+      <viewAttribute id="SEASON">
+        <descriptions defaultDescription="SEASON"/>
+      </viewAttribute>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="chickenwingdemo.db.synonym::PRICE_CALENDAR">
+      <mapping xsi:type="Calculation:AttributeMapping" target="CDATE" source="CDATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="RATE" source="RATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SEASON" source="SEASON"/>
+    </input>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_2">
+    <viewAttributes>
+      <viewAttribute id="DATE_SQL">
+        <descriptions defaultDescription="DATE_SQL"/>
+      </viewAttribute>
+      <viewAttribute id="YEAR">
+        <descriptions defaultDescription="YEAR"/>
+      </viewAttribute>
+      <viewAttribute id="MONTH">
+        <descriptions defaultDescription="MONTH"/>
+      </viewAttribute>
+      <viewAttribute id="WEEK">
+        <descriptions defaultDescription="WEEK"/>
+      </viewAttribute>
+      <viewAttribute id="QUARTER">
+        <descriptions defaultDescription="QUARTER"/>
+      </viewAttribute>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="chickenwingdemo.db.synonym::time">
+      <mapping xsi:type="Calculation:AttributeMapping" target="DATE_SQL" source="DATE_SQL"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="YEAR" source="YEAR"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MONTH" source="MONTH"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="WEEK" source="WEEK"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="QUARTER" source="QUARTER"/>
+    </input>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="C1_1" joinType="leftOuter">
+    <viewAttributes>
+      <viewAttribute id="CDATE">
+        <descriptions defaultDescription="CDATE"/>
+      </viewAttribute>
+      <viewAttribute id="RATE">
+        <descriptions defaultDescription="RATE"/>
+      </viewAttribute>
+      <viewAttribute id="SEASON">
+        <descriptions defaultDescription="SEASON"/>
+      </viewAttribute>
+      <viewAttribute id="YEAR">
+        <descriptions defaultDescription="YEAR"/>
+      </viewAttribute>
+      <viewAttribute id="MONTH">
+        <descriptions defaultDescription="MONTH"/>
+      </viewAttribute>
+      <viewAttribute id="WEEK">
+        <descriptions defaultDescription="WEEK"/>
+      </viewAttribute>
+      <viewAttribute id="QUARTER">
+        <descriptions defaultDescription="QUARTER"/>
+      </viewAttribute>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="Projection_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="CDATE" source="CDATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="RATE" source="RATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SEASON" source="SEASON"/>
+    </input>
+    <input node="Projection_2">
+      <mapping xsi:type="Calculation:AttributeMapping" target="YEAR" source="YEAR"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MONTH" source="MONTH"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="WEEK" source="WEEK"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="QUARTER" source="QUARTER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CDATE" source="DATE_SQL"/>
+    </input>
+    <joinAttribute name="CDATE"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_1">
+  <attributes>
+    <attribute id="CDATE" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CDATE"/>
+      <keyMapping columnObjectName="Join_1" columnName="CDATE"/>
+    </attribute>
+    <attribute id="RATE" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="RATE"/>
+      <keyMapping columnObjectName="Join_1" columnName="RATE"/>
+    </attribute>
+    <attribute id="SEASON" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SEASON"/>
+      <keyMapping columnObjectName="Join_1" columnName="SEASON"/>
+    </attribute>
+    <attribute id="YEAR" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="YEAR"/>
+      <keyMapping columnObjectName="Join_1" columnName="YEAR"/>
+    </attribute>
+    <attribute id="MONTH" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="MONTH"/>
+      <keyMapping columnObjectName="Join_1" columnName="MONTH"/>
+    </attribute>
+    <attribute id="WEEK" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="WEEK"/>
+      <keyMapping columnObjectName="Join_1" columnName="WEEK"/>
+    </attribute>
+    <attribute id="QUARTER" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="QUARTER"/>
+      <keyMapping columnObjectName="Join_1" columnName="QUARTER"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="90" y="173"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="-23" y="348"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Projection_2" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="224" y="353"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="90" y="231"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Projection_1" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="Projection_2" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

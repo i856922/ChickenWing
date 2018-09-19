@@ -1,0 +1,36 @@
+PROCEDURE "chickenwingdemo.db.procedures::createAirport" (
+	IN im_code NVARCHAR(3),
+	IN im_name NVARCHAR(50),
+	IN im_city NVARCHAR(20),
+	IN im_country NVARCHAR(20),
+	IN im_timezone NVARCHAR(3),
+	IN im_latitude DECIMAL(12,6),
+	IN im_longitude DECIMAL(12,6),
+	OUT ex_error NVARCHAR(100))
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   --DEFAULT SCHEMA <default_schema_name>
+   AS
+BEGIN
+   /*************************************
+       Write your procedure logic 
+   *************************************/
+	declare noc integer;
+	
+	select count("CODE") into noc
+	from "chickenwingdemo.db.synonym::AIRPORT"
+	where "CODE" = :im_code;
+	
+	if :noc > 0 then
+		ex_error := 'ERROR:Airport' || :im_code || 'alreadyexists!';
+	else
+		insert into "chickenwingdemo.db.synonym::AIRPORT"
+		values(:im_code,
+			   :im_name,
+			   :im_city,
+			   :im_country,
+			   :im_timezone,
+			   :im_latitude,
+			   :im_longitude);
+	end if;
+END

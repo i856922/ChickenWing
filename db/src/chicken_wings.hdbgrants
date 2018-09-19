@@ -3,14 +3,14 @@
 		"object_owner":{
 			"schema_privileges":[
 				{ "reference":"CHICKEN_WINGS",
-				  "privileges_with_grant_option":["SELECT"]
+				  "privileges_with_grant_option":["SELECT", "INSERT"]
 				}
 			]
 		},
 		"application_user":{
 			"schema_privileges":[
 				{ "reference":"CHICKEN_WINGS",
-				  "privileges":["SELECT"]
+				  "privileges":["SELECT", "INSERT"]
 				}
 			]
 		}

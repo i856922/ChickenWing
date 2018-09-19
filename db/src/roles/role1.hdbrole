@@ -1,0 +1,21 @@
+{
+	"role":{
+		"name": "chickenwingdemo.db.roles::role1.hdbrole",
+		"schema_privileges": [{
+		   "privileges": ["SELECT METADATA",
+		    			  "SELECT CDS METADATA",
+		    			  "SELECT", "UNMASKED"]
+		}],
+		"object_privileges": [{
+			"name": "chickenwingdemo.db.procedures::createAirport",
+			"type": "PROCEDURE",
+			"privileges": ["EXECUTE"]
+			},
+			{
+			"name": "chickenwingdemo.db.models::CV_AIRPORT",
+			"type": "VIEW",
+			"privileges": ["SELECT"]
+			}
+    	]
+    }
+}
